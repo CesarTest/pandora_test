@@ -1,0 +1,8 @@
+---
+- name: Setup PXE Server 
+  hosts: pxe_servers 
+  roles:
+    - role: robertdebock.bootstrap
+    - role: cdg.dhcp 
+    - role: robertdebock.dnsmasq
+    - role: netbootxyz.netboot.xyz 

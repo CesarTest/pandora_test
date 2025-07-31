@@ -1,0 +1,22 @@
+---
+### dhcp server
+dhcpd_pxe_filename: "ipxe/netboot.xyz-undionly.kpxe"
+dhcpd_efi_filename: "ipxe/netboot.xyz.efi"
+dhcpd_efi64_filename: "ipxe/netboot.xyz-arm64-snponly.efi"
+dhcpd_interfaces:
+  - "{{ ansible_default_ipv4.interface | default('eth0') }}"
+dhcpd_tftpd_server: "192.168.56.150"
+dhcpd_subnets:
+  "192.168.56.0/24":
+    range: "192.168.56.128/25"
+    dns_servers:
+      - "{{ dhcpd_tftpd_server }}"
+    dns_search:
+      - "pandora.lab"
+    tftpd_server: "{{ dhcpd_tftpd_server }}"
+    hosts:
+      - name: "test"
+        ip_addr: "192.168.56.129"
+        mac_addr: "08:00:27:a3:64:b0"
+    routers:
+      - ip: "192.168.56.254"

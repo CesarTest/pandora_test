@@ -1,0 +1,5 @@
+### entorno ejecucion
+bootloader_tftpd_server: "192.168.56.150"
+bootloader_tftpd_server_network: "192.168.56.0/24"
+bootloader_domain: "pandora.lab"
+bootloader_web_server: "http://{{ bootloader_tftpd_server }}"

@@ -1,0 +1,10 @@
+### tftp + dns server
+dnsmasq_enable_tftp: true 
+dnsmasq_tftp_root: "/var/www/html"
+dnsmasq_tftp_no_fail: false
+dnsmasq_tftp_secure: false
+dnsmasq_tftp_no_blocksize: false 
+dnsmasq_domains:
+    - name: "{{ bootloader_domain }}"
+      subnet: "{{ bootloader_tftpd_server_network }}"
+      domain: "{{ bootloader_domain }}"
