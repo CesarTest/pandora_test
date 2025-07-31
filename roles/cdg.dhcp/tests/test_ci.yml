@@ -1,0 +1,26 @@
+---
+# dhcpd tests/verify.yml
+#
+# SPDX-FileCopyrightText: © 2025 Econocom Systems 
+# SPDX-License-Identifier: Apache-2.0   
+
+- import_playbook: test_role.yml
+  vars:
+     dhcpd_interfaces:
+       - "{{ ansible_default_ipv4.interface | default(eth0) }}"
+     dhcpd_subnets:
+       "192.168.56.0/24":
+         range: "192.168.56.128/25"
+         dns_servers:
+           - "192.168.0.1"
+           - "192.168.0.2"
+         dns_search:
+           - "lab.example.com"
+         tftpd_server: "192.168.56.150"
+         hosts:
+           - name: "serverc"
+             ip_addr: "192.168.56.151"
+             mac_addr: "08:00:27:a3:64:b0"
+         routers:
+           - ip: "192.168.56.254"
+  # Different Test Cases Verification should be here here

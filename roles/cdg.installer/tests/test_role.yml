@@ -1,0 +1,7 @@
+
+---
+- name: Shoot the Test of Role |cdg.installer|
+  hosts: all
+  roles:
+  - ./cdg.installer
+

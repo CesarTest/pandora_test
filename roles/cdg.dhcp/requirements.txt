@@ -1,0 +1,13 @@
+# dhcp requiremets.txt
+#
+# SPDX-FileCopyrightText: © 2025 CDG 
+# SPDX-License-Identifier: Apache-2.0      
+
+# Note: this requirements.txt file is used to specify what dependencies are
+# needed to make the package run rather than for deployment of a tested set of
+# packages.  Thus, this should be the loosest set possible (only required
+# packages, not optional ones, and with the widest range of versions that could
+# be suitable)
+jinja2 >= 3.1.0  # Jinja2 native macro support fixed in 3.1.0
+PyYAML >= 5.1  # PyYAML 5.1 is required for Python 3.8+ support
+netaddr >= 1.0 # ipaddr filter

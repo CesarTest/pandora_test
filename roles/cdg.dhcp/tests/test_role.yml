@@ -1,0 +1,6 @@
+---
+- name: Shoot the Test of Role |cdg.dhcp|
+  hosts: all
+  roles:
+  - ./cdg.dhcp
+

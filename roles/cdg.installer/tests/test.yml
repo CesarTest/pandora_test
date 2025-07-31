@@ -1,0 +1,5 @@
+
+--- 
+- name: Test Suite | Role with Defaults
+  import_playbook: test_role.yml
+

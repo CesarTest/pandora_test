@@ -1,0 +1,8 @@
+---
+# role molecula/centos/convergence.yml
+#
+# SPDX-FileCopyrightText: © 2025 CDG 
+# SPDX-License-Identifier: Apache-2.0     
+
+- name: Main Test Suite
+  import_playbook: ../../tests/test.yml    

@@ -1,0 +1,56 @@
+---
+# role molecule/centos/prepare.yml
+#
+# SPDX-FileCopyrightText: © 2025 Econocom Systems 
+# SPDX-License-Identifier: Apache-2.0 
+
+- name: Prepare
+  hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Test SystemD
+    shell: systemctl status
+    register: systemd_status
+  - name: Mostrar estado de Systemd
+    debug:
+      msg: "{{ systemd_status.stdout }}"
+  - name: List Repos
+    ignore_errors: yes
+    find:
+      paths: /etc/yum.repos.d
+      file_type: file
+    register: found_repos
+  - name: Fix Repos URL
+    ignore_errors: yes
+    replace:
+        path: "{{ repo.path }}"
+        regexp: "mirror.centos.org"
+        replace: "vault.centos.org"
+    loop: "{{ found_repos.files | default([]) }}"
+    loop_control:
+       loop_var: repo
+  - name: Fix Repos baseurl
+    ignore_errors: yes
+    replace:
+        path: "{{ repo.path }}"
+        regexp: "#.*baseurl=http"
+        replace: "baseurl=http"
+    loop: "{{ found_repos.files | default([]) }}"
+    loop_control:
+       loop_var: repo
+  - name: Fix Repos mirrorlist
+    ignore_errors: yes
+    replace:
+        path: "{{ repo.path }}"
+        regexp: "mirrorlist=http"
+        replace: "##mirrorlist=http"
+    loop: "{{ found_repos.files | default([]) }}"
+    loop_control:
+       loop_var: repo
+  - name: Rebuild RPM Database
+    ignore_errors: yes
+    command: "rpm --rebuilddb"
+
+
+     

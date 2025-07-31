@@ -1,0 +1,9 @@
+---
+# packages       
+dhcp_package_name: 
+  - dhcp-server
+
+# daemon properties
+dhcpd_service: "dhcpd"
+dhcpd_config_dir: "/etc/dhcp"
+dhcpd_groupname: "root"

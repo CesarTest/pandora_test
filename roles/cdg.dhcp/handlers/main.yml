@@ -1,0 +1,11 @@
+---
+# dhcp handlers/main.yml
+#
+# SPDX-FileCopyrightText: © 2025 CDG 
+# SPDX-License-Identifier: Apache-2.0    
+
+- name: dhcpd-restart
+  become: true
+  service:
+    name: "{{ dhcpd_service }}"
+    state: restarted        

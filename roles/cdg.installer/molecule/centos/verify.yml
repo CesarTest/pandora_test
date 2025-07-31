@@ -1,0 +1,12 @@
+---
+- name: Verify
+  hosts: all
+  become: no
+  gather_facts: no
+  tasks:
+   - name: Log
+     debug:
+       msg: "Casa"
+   #- name: Check port 80
+   #  ansible.builtin.wait_for:
+   #    port: 80

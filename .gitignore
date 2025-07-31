@@ -7,7 +7,7 @@
 *.log
 # add local roles but ignore everything else
 roles/*
-!roles/mylocalrole
+!roles/cdg.*
 !roles/requirements.yml
 collections/ansible_collections
 .ansible

@@ -1,0 +1,9 @@
+---
+# role molecule/centos/requirements.yml
+#
+# SPDX-FileCopyrightText: © 2025 CDG 
+# SPDX-License-Identifier: Apache-2.0
+
+collections:
+  - name: community.docker
+    version: ">=3.10.4"

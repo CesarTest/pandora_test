@@ -1,0 +1,60 @@
+---
+# pxe tasks/main.yml
+#
+# SPDX-FileCopyrightText: © 2025 CDG 
+# SPDX-License-Identifier: Apache-2.0      
+
+# dhcp.check
+- name: assert | Test dhcpd_interfaces
+  ansible.builtin.assert:
+    that:
+     - dhcpd_interfaces is defined
+     - dhcpd_interfaces is not none
+     - dhcpd_interfaces is not string
+     - dhcpd_interfaces is not mapping
+     - dhcpd_interfaces is iterable
+    quiet: true   
+
+- name: assert | Test dhcpd_subnets
+  ansible.builtin.assert:
+    that:
+     - dhcpd_subnets is defined
+     - dhcpd_subnets is not none
+     - dhcpd_subnets is not string
+     - dhcpd_subnets is mapping
+     - dhcpd_interfaces is iterable
+    quiet: true   
+
+- name: include OS-specific vars
+  include_vars: "{{ item }}"
+  with_first_found:
+   - "{{ ansible_distribution }}_{{ ansible_distribution_version }}.yml"
+   - "{{ ansible_distribution }}.yml"
+   - "{{ ansible_os_family }}.yml"
+
+# dhcp.install                  
+- name: Install DHCP Package
+  become: true
+  ansible.builtin.package:
+    name: "{{ dhcp_package_name }}"
+    state: latest
+
+# dhcp.setup                        
+- name: Create dhcpd.conf from template
+  become: true      
+  template:
+    src: "{{ dhcpd_template_name }}"
+    dest: "{{ dhcpd_config_dir }}/{{ dhcpd_config_filename }}"
+    backup: true
+    mode: "0644"
+    owner: root
+    group: "{{ dhcpd_groupname }}"
+    # validate: dhcpd -t -cf %s # Does not work...
+  notify:
+    - dhcpd-restart
+
+- name: dhcpd-start
+  become: true
+  service:
+    name: "{{ dhcpd_service }}"
+    state: started              

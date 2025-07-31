@@ -1,0 +1,7 @@
+---         
+# dhcpd molecule/centos/verify.yml
+#
+# SPDX-FileCopyrightText: © 2025 Econocom Systems 
+# SPDX-License-Identifier: Apache-2.0 
+- name: Test Suite for the Role
+  import_playbook: ../../tests/verify.yml

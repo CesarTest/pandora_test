@@ -1,0 +1,18 @@
+---
+# pxe defaults/main.yml
+#
+# SPDX-FileCopyrightText: © 2025 Econocom Systems 
+# SPDX-License-Identifier: Apache-2.0   
+
+# interfaces to listen on
+dhcpd_interfaces: []
+
+# subnets to serve DHCP on
+dhcpd_subnets: {}
+
+# default PXE and EFI TFTP delivered files
+dhcpd_pxe_filename: "undionly.kpxe"
+dhcpd_efi_filename: "snponly.efi"
+dhcpd_template_name: "dhcpd.conf.j2"
+dhcpd_config_filename: "dhcpd.conf"      
+
