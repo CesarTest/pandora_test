@@ -1,8 +1,10 @@
 ---
 - name: Setup PXE Server 
   hosts: pxe_servers 
-  roles:
+  rolesi:
+    - role: cdg.local-repos
+    - role: cdg.repos 
     - role: robertdebock.bootstrap
-    - role: cdg.dhcp 
     - role: robertdebock.dnsmasq
-    - role: netbootxyz.netboot.xyz 
+    #- role: cdg.booloader
+    #- role: cdg.installer
